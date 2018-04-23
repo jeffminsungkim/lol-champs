@@ -1,6 +1,6 @@
 {
  "name": "lol-champs",
- "version": "0.0.0",
+ "version": "0.0.1",
  "description": "Get champion names of League of Legends",
  "license": "MIT",
  "repository": {
