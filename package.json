@@ -1,0 +1,63 @@
+{
+ "name": "lol-champs",
+ "version": "0.0.0",
+ "description": "Get champion names of League of Legends",
+ "license": "MIT",
+ "repository": {
+  "type": "git",
+  "url": "git+https://github.com/jeffminsungkim/lol-champs.git"
+ },
+ "author": {
+  "name": "JeffMinsungKim",
+  "email": "jeffminsungkim@gmail.com",
+  "url": "https://jeffminsungkim.com"
+ },
+ "homepage": "https://github.com/jeffminsungkim/lol-champs#readme",
+ "bugs": {
+  "url": "https://github.com/jeffminsungkim/lol-champs/issues"
+ },
+ "engines": {
+  "node": ">=4"
+ },
+ "main": "dist/index.js",
+ "types": "dist/index.d.ts",
+ "scripts": {
+  "build": "tsc",
+  "test": "jest",
+  "watchtest": "jest --watch",
+  "prepublish": "npm run build && npm run test"
+ },
+ "files": [
+  "dist"
+ ],
+ "jest": {
+  "transform": {
+   "^.+\\.tsx?$": "ts-jest"
+  },
+  "testRegex": "(/__tests__/|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+  "moduleFileExtensions": [
+   "ts",
+   "tsx",
+   "js"
+  ]
+ },
+ "keywords": [
+  "lol",
+  "league-of-legends",
+  "league of legends",
+  "champions",
+  "champion list",
+  "riot",
+  "static-data",
+  "name",
+  "id"
+ ],
+ "dependencies": {},
+ "devDependencies": {
+  "@types/jest": "^22.2.3",
+  "@types/node": "^9.6.6",
+  "jest": "^22.4.3",
+  "ts-jest": "^22.4.4",
+  "typescript": "^2.8.3"
+ }
+}
