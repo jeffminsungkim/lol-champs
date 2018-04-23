@@ -17,7 +17,7 @@
   "url": "https://github.com/jeffminsungkim/lol-champs/issues"
  },
  "engines": {
-  "node": ">=4"
+  "node": ">=6"
  },
  "main": "dist/index.js",
  "types": "dist/index.d.ts",
