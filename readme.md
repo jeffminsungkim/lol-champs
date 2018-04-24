@@ -84,7 +84,7 @@ lolChamps.getName(35, 'ko');
 //=> '샤코'
 ```
 
-### .getId(champId: number, lang: string = 'en') : string
+### .getId(name: string, lang: string = 'en') : string
 
 Get champion ID by using name.
 
