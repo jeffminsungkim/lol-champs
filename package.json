@@ -28,7 +28,8 @@
   "prepublish": "npm run build && npm run test"
  },
  "files": [
-  "dist"
+  "dist",
+  "data"
  ],
  "jest": {
   "setupTestFrameworkScriptFile": "jest-extended",
