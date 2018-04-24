@@ -31,6 +31,7 @@
   "dist"
  ],
  "jest": {
+  "setupTestFrameworkScriptFile": "jest-extended",
   "transform": {
    "^.+\\.tsx?$": "ts-jest"
   },
@@ -42,21 +43,25 @@
   ]
  },
  "keywords": [
-  "lol",
-  "league-of-legends",
-  "league of legends",
+  "lol champs",
+  "lol-champs",
+  "lol champion",
+  "random lol champion",
   "champions",
   "champion list",
   "riot",
   "static-data",
-  "name",
-  "id"
+  "league-of-legends",
+  "league of legends"
  ],
- "dependencies": {},
+ "dependencies": {
+  "unique-random-array": "^1.0.1"
+ },
  "devDependencies": {
   "@types/jest": "^22.2.3",
   "@types/node": "^9.6.6",
   "jest": "^22.4.3",
+  "jest-extended": "^0.7.1",
   "ts-jest": "^22.4.4",
   "typescript": "^2.8.3"
  }

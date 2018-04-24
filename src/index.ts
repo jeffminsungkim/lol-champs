@@ -1,3 +1,5 @@
+const uniqueRandomArray = require('unique-random-array');
+const randomNameGenerator = new Map();
 export const languages = new Set([
   "cs",
   "de",
@@ -42,6 +44,21 @@ export function getName(champId: number, lang: string = "en") : string {
   return champs[matched].name;
 }
 
+export function getChampion(name: string, lang: string = "en") : object {
+  const champs = determineLangCode(lang);
+  let champName = name;
+  if (champName.match(' ')) champName = capitalizeName(name);
+
+  const data = Object.keys(champs).filter((key) => {
+    return champs[key].name === champName || key === champName || key.toLowerCase() === champName
+  }).toString();
+
+  if (data === "")
+    throw new Error(`${champName} does not exists. Please double check the name.`);
+
+  return champs[data];
+}
+
 export function getId(name: string, lang: string = "en") : number {
   const champs = determineLangCode(lang);
   let champName = name;
@@ -67,4 +84,15 @@ export function all(lang: string = "en") : Array<string> {
     throw new Error(`Localized list for language code '${lang}' does not exist.`);
   }
   return assembleNameList(champs);
+}
+
+export function random(lang: string = "en") : string {
+  if (randomNameGenerator.has(lang))
+    return randomNameGenerator.get(lang)();
+
+  const champs = determineLangCode(lang);
+  const random = uniqueRandomArray(assembleNameList(champs));
+  randomNameGenerator.set(lang, random);
+
+  return random();
 }

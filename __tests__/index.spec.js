@@ -1,6 +1,11 @@
 const lolChamps = require("../dist/index");
 const fixture = require("./fixtures/index");
 
+function determineLangCode(lang) {
+  const champs = require(`../data/${lang}.json`);
+  return champs.data;
+}
+
 describe("Check support languages", () => {
   const supportedLangs = fixture.tags;
 
@@ -151,5 +156,42 @@ describe("Throws an error when the champion name does not exists", () => {
     expect(() => {
       lolChamps.getId("teeeemo");
     }).toThrowError("teeeemo does not exists. Please double check the name.");
+  });
+});
+
+describe("Champion data", () => {
+  it("should return object type of a champion TahmKench data", () => {
+    const mock = determineLangCode("en");
+    const champData = lolChamps.getChampion("tahmkench");
+    expect(champData).toBeObject();
+    expect(champData).toBe(mock.TahmKench);
+  });
+
+  it("should return object type of a champion Fiddlesticks data", () => {
+    const mock = determineLangCode("ko");
+    const champData = lolChamps.getChampion("피들스틱", "ko");
+    expect(champData).toBeObject();
+    expect(champData).toBe(mock.Fiddlesticks);
+  });
+
+  it("should return object type of a champion Blitzcrank data", () => {
+    const mock = determineLangCode("zh-Hans");
+    const champData = lolChamps.getChampion("蒸汽机器人", "zh-Hans");
+    expect(champData).toBeObject();
+    expect(champData).toBe(mock.Blitzcrank);
+  });
+
+  it("should return object type of a champion LeeSin data", () => {
+    const mock = determineLangCode("ru");
+    const champData = lolChamps.getChampion("Ли Син", "ru");
+    expect(champData).toBeObject();
+    expect(champData).toBe(mock.LeeSin);
+  });
+});
+
+describe("Random champion names", () => {
+  it("should return string type of random name", () => {
+    const champName = lolChamps.random("ja");
+    expect(champName).toBeString();
   });
 });

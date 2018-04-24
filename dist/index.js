@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var uniqueRandomArray = require('unique-random-array');
+var randomNameGenerator = new Map();
 exports.languages = new Set([
     "cs",
     "de",
@@ -41,6 +43,20 @@ function getName(champId, lang) {
     return champs[matched].name;
 }
 exports.getName = getName;
+function getChampion(name, lang) {
+    if (lang === void 0) { lang = "en"; }
+    var champs = determineLangCode(lang);
+    var champName = name;
+    if (champName.match(' '))
+        champName = capitalizeName(name);
+    var data = Object.keys(champs).filter(function (key) {
+        return champs[key].name === champName || key === champName || key.toLowerCase() === champName;
+    }).toString();
+    if (data === "")
+        throw new Error(champName + " does not exists. Please double check the name.");
+    return champs[data];
+}
+exports.getChampion = getChampion;
 function getId(name, lang) {
     if (lang === void 0) { lang = "en"; }
     var champs = determineLangCode(lang);
@@ -67,3 +83,13 @@ function all(lang) {
     return assembleNameList(champs);
 }
 exports.all = all;
+function random(lang) {
+    if (lang === void 0) { lang = "en"; }
+    if (randomNameGenerator.has(lang))
+        return randomNameGenerator.get(lang)();
+    var champs = determineLangCode(lang);
+    var random = uniqueRandomArray(assembleNameList(champs));
+    randomNameGenerator.set(lang, random);
+    return random();
+}
+exports.random = random;
