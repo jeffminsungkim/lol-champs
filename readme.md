@@ -68,6 +68,53 @@ lolChamps.all('zh-Hans');
 //=> ['齐天大圣', '武器大师', ...]
 ```
 
+### .getChampion(name: string, lang: string = 'en') : object
+
+Get champion data by using name.
+
+#### lang
+
+[Language code](#supported-languages) to retrieve the champion data.
+
+```js
+lolChamps.getChampion('Cassiopeia');
+//=> { title: 'the Serpent's Embrace', id: 69, key: 'Cassiopeia', name: 'Cassiopeia'},
+
+lolChamps.getChampion('Ли Син', 'ru');
+//=> { title: 'Слепой монах', id: 64, key: 'LeeSin', name: 'Ли Син' }
+```
+
+### .random(lang: string = 'en') : string
+
+Get a random champion name that's **never the same as the previous**.
+
+```js
+lolChamps.random();
+lolChamps.random();
+//=> 'Fizz'
+//=> 'Thresh'
+
+lolChamps.random('ko');
+lolChamps.random('ko');
+//=> '야스오'
+//=> '티모'
+
+lolChamps.random('zh-Hans');
+lolChamps.random('zh-Hans');
+//=> '蒸汽机器人'
+//=> '时间刺客'
+
+lolChamps.random('ru');
+lolChamps.random('ru');
+//=> 'Катарина'
+//=> 'Пантеон'
+
+lolChamps.random('ja');
+lolChamps.random('ja');
+//=> 'トリスターナ'
+//=> 'ソラカ'
+```
+
 ### .getName(champId: number, lang: string = 'en') : string
 
 Get champion name by using ID.
@@ -93,7 +140,7 @@ Get champion ID by using name.
 [Language code](#supported-languages) of the localized name.
 
 ```js
-lolChamps.getName("Amumu");
+lolChamps.getName('Amumu');
 //=> '32'
 
 lolChamps.getName("Амуму", 'ru');
