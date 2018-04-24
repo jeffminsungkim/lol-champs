@@ -145,3 +145,11 @@ describe("Get champion id by name", () => {
     expect(id).toBe(202);
   });
 });
+
+describe("Throws an error when the champion name does not exists", () => {
+  it("should throw an error message", () => {
+    expect(() => {
+      lolChamps.getId("teeeemo");
+    }).toThrowError("teeeemo does not exists. Please double check the name.");
+  });
+});

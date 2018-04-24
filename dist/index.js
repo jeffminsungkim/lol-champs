@@ -50,6 +50,8 @@ function getId(name, lang) {
     var matched = Object.keys(champs).filter(function (key) {
         return champs[key].name === champName || key === champName || key.toLowerCase() === champName;
     }).toString();
+    if (matched === "")
+        throw new Error(champName + " does not exists. Please double check the name.");
     return champs[matched].id;
 }
 exports.getId = getId;

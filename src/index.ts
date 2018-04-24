@@ -51,6 +51,9 @@ export function getId(name: string, lang: string = "en") : number {
     return champs[key].name === champName || key === champName || key.toLowerCase() === champName
   }).toString();
 
+  if (matched === "")
+    throw new Error(`${champName} does not exists. Please double check the name.`);
+
   return champs[matched].id;
 }
 
