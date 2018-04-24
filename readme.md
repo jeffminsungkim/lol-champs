@@ -93,11 +93,11 @@ Get champion ID by using name.
 [Language code](#supported-languages) of the localized name.
 
 ```js
-lolChamps.getName(32);
-//=> 'Amumu'
+lolChamps.getName("Amumu");
+//=> '32'
 
-lolChamps.getName(32, 'ru');
-//=> 'Амуму'
+lolChamps.getName("Амуму", 'ru');
+//=> '32'
 ```
 
 ### .languages : Set<string>
