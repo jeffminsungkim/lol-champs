@@ -38,17 +38,21 @@ import * as lolChamps from 'lol-champs';
 // CommonJS
 const lolChamps = require('lol-champs');
 
+lolChamps.random();
+//=> 'Random champion name' ex) Darius
+
 lolChamps.all();
 //=> ['Wukong', 'Jax', ...]
+
+lolChamps.getChampion();
+//=> { title: 'the Grand Duelist', id: 114, key: 'Fiora', name: 'Fiora' }
 
 lolChamps.getName(222);
 //=> 'Jinx'
 
 lolChamps.getId('Ezreal');
 //=> 81
-
 ```
-
 
 ## API
 
@@ -64,7 +68,7 @@ Get a list of entire names.
 lolChamps.all();
 //=> ['Wukong', 'Jax', ...]
 
-lolChamps.all('zh-Hans');
+lolChamps.all('zh-hans');
 //=> ['齐天大圣', '武器大师', ...]
 ```
 
@@ -99,8 +103,8 @@ lolChamps.random('ko');
 //=> '야스오'
 //=> '티모'
 
-lolChamps.random('zh-Hans');
-lolChamps.random('zh-Hans');
+lolChamps.random('zh-hans');
+lolChamps.random('zh-hans');
 //=> '蒸汽机器人'
 //=> '时间刺客'
 
@@ -140,10 +144,10 @@ Get champion ID by using name.
 [Language code](#supported-languages) of the localized name.
 
 ```js
-lolChamps.getName('Amumu');
+lolChamps.getId('Amumu');
 //=> '32'
 
-lolChamps.getName("Амуму", 'ru');
+lolChamps.getId("Амуму", 'ru');
 //=> '32'
 ```
 
@@ -174,8 +178,8 @@ Champion names are available for the following languages:
 - `ru` (Russian)
 - `tr` (Turkish)
 - `vn` (Vietnamese)
-- `zh-Hans` (Simplified Chinese)
-- `zh-Hant` (Traditional Chinese)
+- `zh-hans` (Simplified Chinese)
+- `zh-hant` (Traditional Chinese)
 
 The language codes follow the [IETF BCP 47 standard](https://en.wikipedia.org/wiki/IETF_language_tag).
 
