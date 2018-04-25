@@ -10,7 +10,7 @@ describe("Check support languages", () => {
   const supportedLangs = fixture.tags;
 
   it("should return false, does not support Bulgarian", () => {
-    expect(lolChamps.languages.has('bg')).toBeFalsy();
+    expect(lolChamps.languages.has("bg")).toBeFalsy();
   });
 
   for (let i = 0; i < supportedLangs.length; i++) {
