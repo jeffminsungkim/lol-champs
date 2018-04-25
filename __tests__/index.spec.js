@@ -62,7 +62,7 @@ describe("Get a list of entire champion names", () => {
   });
 
   it("should return names in Korean", () => {
-    const names = lolChamps.all("ko");
+    const names = lolChamps.all("KO");
     expect(fixture.champions.ko).toEqual(names);
   });
 
@@ -197,7 +197,7 @@ describe("Champion data", () => {
 
 describe("Random champion names", () => {
   it("should return string type of random name", () => {
-    const champName = lolChamps.random("ja");
+    const champName = lolChamps.random("JA");
     expect(champName).toBeString();
   });
 });

@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var uniqueRandomArray = require('unique-random-array');
 var randomNameGenerator = new Map();
+var forceLowerCase = function (str) { return str.toLowerCase(); };
 exports.languages = new Set([
     "cs",
     "de",
@@ -52,7 +53,7 @@ function getChampion(name, lang) {
     if (champName.match(' '))
         champName = capitalizeName(name);
     var data = Object.keys(champs).filter(function (key) {
-        return champs[key].name === champName || key === champName || key.toLowerCase() === champName;
+        return champs[key].name === champName || key === champName || forceLowerCase(key) === champName;
     }).toString();
     if (data === "")
         throw new Error(champName + " does not exists. Please double check the name.");
@@ -66,7 +67,7 @@ function getId(name, lang) {
     if (champName.match(' '))
         champName = capitalizeName(name);
     var matched = Object.keys(champs).filter(function (key) {
-        return champs[key].name === champName || key === champName || key.toLowerCase() === champName;
+        return champs[key].name === champName || key === champName || forceLowerCase(key) === champName;
     }).toString();
     if (matched === "")
         throw new Error(champName + " does not exists. Please double check the name.");
@@ -76,22 +77,24 @@ exports.getId = getId;
 function all(lang) {
     if (lang === void 0) { lang = "en"; }
     var champs = determineLangCode(lang);
-    if (!lang || lang === 'en') {
+    var langCode = forceLowerCase(lang);
+    if (!langCode || langCode === 'en') {
         return assembleNameList(champs);
     }
-    if (!exports.languages.has(lang)) {
-        throw new Error("Localized list for language code '" + lang + "' does not exist.");
+    if (!exports.languages.has(langCode)) {
+        throw new Error("Localized list for language code '" + langCode + "' does not exist.");
     }
     return assembleNameList(champs);
 }
 exports.all = all;
 function random(lang) {
     if (lang === void 0) { lang = "en"; }
-    if (randomNameGenerator.has(lang))
-        return randomNameGenerator.get(lang)();
+    var langCode = forceLowerCase(lang);
+    if (randomNameGenerator.has(langCode))
+        return randomNameGenerator.get(langCode)();
     var champs = determineLangCode(lang);
     var random = uniqueRandomArray(assembleNameList(champs));
-    randomNameGenerator.set(lang, random);
+    randomNameGenerator.set(langCode, random);
     return random();
 }
 exports.random = random;

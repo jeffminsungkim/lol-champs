@@ -1,5 +1,6 @@
 const uniqueRandomArray = require('unique-random-array');
 const randomNameGenerator = new Map();
+const forceLowerCase = (str: string) => str.toLowerCase();
 export const languages = new Set([
   "cs",
   "de",
@@ -53,7 +54,7 @@ export function getChampion(name: string, lang: string = "en") : object {
   if (champName.match(' ')) champName = capitalizeName(name);
 
   const data = Object.keys(champs).filter((key) => {
-    return champs[key].name === champName || key === champName || key.toLowerCase() === champName
+    return champs[key].name === champName || key === champName || forceLowerCase(key) === champName
   }).toString();
 
   if (data === "")
@@ -68,7 +69,7 @@ export function getId(name: string, lang: string = "en") : number {
   if (champName.match(' ')) champName = capitalizeName(name);
 
   const matched = Object.keys(champs).filter((key) => {
-    return champs[key].name === champName || key === champName || key.toLowerCase() === champName
+    return champs[key].name === champName || key === champName || forceLowerCase(key) === champName
   }).toString();
 
   if (matched === "")
@@ -79,23 +80,27 @@ export function getId(name: string, lang: string = "en") : number {
 
 export function all(lang: string = "en") : Array<string> {
   const champs = determineLangCode(lang);
-  if (!lang || lang === 'en') {
+  const langCode = forceLowerCase(lang);
+
+  if (!langCode || langCode === 'en') {
     return assembleNameList(champs);
   }
 
-  if (!languages.has(lang)) {
-    throw new Error(`Localized list for language code '${lang}' does not exist.`);
+  if (!languages.has(langCode)) {
+    throw new Error(`Localized list for language code '${langCode}' does not exist.`);
   }
   return assembleNameList(champs);
 }
 
 export function random(lang: string = "en") : string {
-  if (randomNameGenerator.has(lang))
-    return randomNameGenerator.get(lang)();
+  const langCode = forceLowerCase(lang);
+
+  if (randomNameGenerator.has(langCode))
+    return randomNameGenerator.get(langCode)();
 
   const champs = determineLangCode(lang);
   const random = uniqueRandomArray(assembleNameList(champs));
-  randomNameGenerator.set(lang, random);
+  randomNameGenerator.set(langCode, random);
 
   return random();
 }
