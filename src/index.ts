@@ -15,8 +15,8 @@ export const languages = new Set([
   "ru",
   "tr",
   "vn",
-  "zh-Hans",
-  "zh-Hant"
+  "zh-hans",
+  "zh-hant"
 ]);
 
 function capitalizeName(champsName: string) {
@@ -25,7 +25,7 @@ function capitalizeName(champsName: string) {
 }
 
 function determineLangCode(lang: string = "en") : any {
-  const champs = require(`../data/${lang}.json`);
+  const champs = require(`../data/${lang.toLowerCase()}.json`);
   return champs.data;
 }
 
@@ -40,6 +40,9 @@ export function getName(champId: number, lang: string = "en") : string {
   const matched = Object.keys(champs).filter((key) => {
     return champs[key].id === champId
   }).toString();
+
+  if (matched === "")
+    throw new Error(`${champId} does not exists. Please double check the id.`);
 
   return champs[matched].name;
 }

@@ -63,8 +63,8 @@ describe("Champion data", () => {
   });
 
   it("should return a champion Blitzcrank data", () => {
-    const mock = determineLangCode("zh-Hans");
-    const champData = lolChamps.getChampion("蒸汽机器人", "zh-Hans");
+    const mock = determineLangCode("zh-hans");
+    const champData = lolChamps.getChampion("蒸汽机器人", "zh-hans");
     expect(champData).toBe(mock.Blitzcrank);
   });
 

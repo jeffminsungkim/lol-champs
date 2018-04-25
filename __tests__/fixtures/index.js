@@ -1,4 +1,4 @@
-const tags = ["cs", "de", "el", "en", "fr", "hu", "it", "ja", "ko", "pl", "pt", "ru", "tr", "vn", "zh-Hans", "zh-Hant"];
+const tags = ["cs", "de", "el", "en", "fr", "hu", "it", "ja", "ko", "pl", "pt", "ru", "tr", "vn", "zh-hans", "zh-hant"];
 
 const champions = {
   cs: [

@@ -2,7 +2,7 @@ const lolChamps = require("../dist/index");
 const fixture = require("./fixtures/index");
 
 function determineLangCode(lang) {
-  const champs = require(`../data/${lang}.json`);
+  const champs = require(`../data/${lang.toLowerCase()}.json`);
   return champs.data;
 }
 
@@ -92,12 +92,12 @@ describe("Get a list of entire champion names", () => {
   });
 
   it("should return names in Simplified Chinese", () => {
-    const names = lolChamps.all("zh-Hans");
+    const names = lolChamps.all("zh-hans");
     expect(fixture.champions.zhHans).toEqual(names);
   });
 
   it("should return names in Traditional Chinese", () => {
-    const names = lolChamps.all("zh-Hant");
+    const names = lolChamps.all("zh-hant");
     expect(fixture.champions.zhHants).toEqual(names);
   });
 });
@@ -114,7 +114,7 @@ describe("Get champion name by id", () => {
   });
 
   it("should return 诺克萨斯之手", () => {
-    const name = lolChamps.getName(122, "zh-Hans");
+    const name = lolChamps.getName(122, "zh-hans");
     expect(name).toBe("诺克萨斯之手");
   });
 });
@@ -152,10 +152,16 @@ describe("Get champion id by name", () => {
 });
 
 describe("Throws an error when the champion name does not exists", () => {
-  it("should throw an error message", () => {
+  it("should throw an error message if a champion name does not exist", () => {
     expect(() => {
       lolChamps.getId("teeeemo");
     }).toThrowError("teeeemo does not exists. Please double check the name.");
+  });
+
+  it("should throw an error message if an id does not exist", () => {
+    expect(() => {
+      lolChamps.getName(999);
+    }).toThrowError("999 does not exists. Please double check the id.");
   });
 });
 
@@ -175,8 +181,8 @@ describe("Champion data", () => {
   });
 
   it("should return object type of a champion Blitzcrank data", () => {
-    const mock = determineLangCode("zh-Hans");
-    const champData = lolChamps.getChampion("蒸汽机器人", "zh-Hans");
+    const mock = determineLangCode("ZH-HANS");
+    const champData = lolChamps.getChampion("蒸汽机器人", "zh-hans");
     expect(champData).toBeObject();
     expect(champData).toBe(mock.Blitzcrank);
   });

@@ -17,8 +17,8 @@ exports.languages = new Set([
     "ru",
     "tr",
     "vn",
-    "zh-Hans",
-    "zh-Hant"
+    "zh-hans",
+    "zh-hant"
 ]);
 function capitalizeName(champsName) {
     var regexp = /([A-Za-z\u00C0-\u1FFF\u2800-\uFFFD]+)/gi;
@@ -26,7 +26,7 @@ function capitalizeName(champsName) {
 }
 function determineLangCode(lang) {
     if (lang === void 0) { lang = "en"; }
-    var champs = require("../data/" + lang + ".json");
+    var champs = require("../data/" + lang.toLowerCase() + ".json");
     return champs.data;
 }
 function assembleNameList(champs) {
@@ -40,6 +40,8 @@ function getName(champId, lang) {
     var matched = Object.keys(champs).filter(function (key) {
         return champs[key].id === champId;
     }).toString();
+    if (matched === "")
+        throw new Error(champId + " does not exists. Please double check the id.");
     return champs[matched].name;
 }
 exports.getName = getName;
